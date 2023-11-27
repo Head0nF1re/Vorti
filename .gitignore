@@ -254,8 +254,8 @@ paket-files/
 # FAKE - F# Make
 .fake/
 
-# JetBrains Rider
-.idea/
+# JetBrains
+.idea/**/workspace.xml
 *.sln.iml
 
 # CodeRush

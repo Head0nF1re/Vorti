@@ -12,11 +12,23 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Vorti</RootNamespace>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
+
+    <ItemGroup>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <Folder Include="obj\"/>
+    </ItemGroup>
 
 </Project>
