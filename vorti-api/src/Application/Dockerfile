@@ -10,7 +10,8 @@ RUN dotnet build --no-restore "./Application.csproj" -c Debug -o /app/build /p:U
 #FROM build AS publish
 #RUN dotnet publish --no-restore "./Application.csproj" -c Debug -o /app/publish /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+# Run on Ubuntu 22.04
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-jammy
 
 # Make vorti-api listen on docker internal localhost and port
 ENV ASPNETCORE_URLS=http://host.docker.internal:8080 \

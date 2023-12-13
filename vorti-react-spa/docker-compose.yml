@@ -1,0 +1,26 @@
+﻿services:
+    frontend:
+        build:
+            context: .
+            dockerfile: ./dev.Dockerfile
+        tty: true
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/app/
+        networks:
+            - vorti-network
+
+    nginx:
+        build:
+            context: .
+            dockerfile: ./nginx/dev.Dockerfile
+        ports:
+            - "8000:80"
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - vorti-network
+networks:
+    vorti-network:
+        external: true
