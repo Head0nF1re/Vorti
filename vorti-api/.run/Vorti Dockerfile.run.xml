@@ -18,7 +18,7 @@
             </DockerPortBindingImpl>
           </list>
         </option>
-        <option name="commandLineOptions" value="--network=vorti-network --host=0.0.0.0" />
+        <option name="commandLineOptions" value="--network=vorti-network" />
         <option name="sourceFilePath" value="src/Application/Dockerfile" />
       </settings>
     </deployment>
