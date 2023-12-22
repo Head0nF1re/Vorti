@@ -17,9 +17,8 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-
-app.MapGet("api/testing", () => "Hey");
-
+app.UsePathBase("/api");
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

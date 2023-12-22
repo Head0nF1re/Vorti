@@ -6,7 +6,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
-  fetch("http://localhost:8000/api/testing")
+  fetch("http://localhost:8000/api/WeatherForecast")
     .then(res => console.log(res.json()))
     .catch(ex => console.log(ex));
 
