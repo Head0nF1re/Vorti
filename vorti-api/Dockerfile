@@ -13,9 +13,16 @@ RUN dotnet build --no-restore "./Application.csproj" -c Debug -o /app/build /p:U
 # Run on Ubuntu 22.04
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy
 
+COPY ./localhost.crt /app/localhost.crt
+COPY ./localhost.key /app/localhost.key
+
 # Make vorti-api listen on docker internal localhost and port
-ENV ASPNETCORE_HTTP_PORT=8080 \
+ENV ASPNETCORE_URLS=https://+
+    ASPNETCORE_HTTPS_PORTS=8081 \
+    ASPNETCORE_HTTP_PORT=8080 \
     ASPNETCORE_ENVIRONMENT=Development \
+    ASPNETCORE_Kestrel__Certificates__Default__Path=/app/localhost.crt \
+    ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/app/localhost.key \
     ASPNETCORE_Kestrel__EndpointDefaults__Protocols=Http1
 
 WORKDIR /app
