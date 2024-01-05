@@ -5,17 +5,20 @@
         <option name="imageTag" value="vorti-api:dev" />
         <option name="buildCliOptions" value="--pull=always" />
         <option name="containerName" value="vorti-api" />
-        <option name="contextFolderPath" value="." />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
               <option name="containerPort" value="8080" />
               <option name="hostPort" value="8080" />
             </DockerPortBindingImpl>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="8081" />
+              <option name="hostPort" value="8081" />
+            </DockerPortBindingImpl>
           </list>
         </option>
         <option name="commandLineOptions" value="--network=vorti-network" />
-        <option name="sourceFilePath" value="src/Application/Dockerfile" />
+        <option name="sourceFilePath" value="Dockerfile" />
       </settings>
     </deployment>
     <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="false" isSslEnabled="false" />

@@ -1,4 +1,4 @@
-namespace Application.IntegrationTests;
+namespace Vorti.IntegrationTests;
 
 public class UnitTest1
 {

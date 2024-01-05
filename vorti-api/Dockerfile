@@ -1,7 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
 
-WORKDIR /src/Application
+WORKDIR /vorti/src
 COPY ./src/Application/Application.csproj ./
+COPY ./Directory.Build.props ./../
+COPY ./Directory.Packages.props ./../
 RUN dotnet restore "./Application.csproj"
 
 COPY ./src ./
@@ -10,19 +12,25 @@ RUN dotnet build --no-restore "./Application.csproj" -c Debug -o /app/build /p:U
 #FROM build AS publish
 #RUN dotnet publish --no-restore "./Application.csproj" -c Debug -o /app/publish /p:UseAppHost=false
 
+# target entrypoint with: docker build --target test
+FROM build AS test
+
+WORKDIR /vorti/tests
+COPY ./tests/**/*.csproj ./
+COPY ./tests/Directory.Packages.props ./
+RUN dotnet restore
+
+COPY tests/ .
+RUN dotnet build --configuration Release --no-restore
+
+ENTRYPOINT ["dotnet", "test", "--configuration", "Release", "--logger:console", "--no-build"]
+
 # Run on Ubuntu 22.04
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy
 
-COPY ./localhost.crt /app/localhost.crt
-COPY ./localhost.key /app/localhost.key
-
 # Make vorti-api listen on docker internal localhost and port
-ENV ASPNETCORE_URLS=https://+
-    ASPNETCORE_HTTPS_PORTS=8081 \
-    ASPNETCORE_HTTP_PORT=8080 \
+ENV ASPNETCORE_HTTP_PORT=8080 \
     ASPNETCORE_ENVIRONMENT=Development \
-    ASPNETCORE_Kestrel__Certificates__Default__Path=/app/localhost.crt \
-    ASPNETCORE_Kestrel__Certificates__Default__KeyPath=/app/localhost.key \
     ASPNETCORE_Kestrel__EndpointDefaults__Protocols=Http1
 
 WORKDIR /app

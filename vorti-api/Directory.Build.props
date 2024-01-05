@@ -1,0 +1,15 @@
+<Project>
+    <PropertyGroup>
+        <RootNamespace>Vorti</RootNamespace>
+        <PlatformTarget>x64</PlatformTarget>
+        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+        <LangVersion>12</LangVersion>
+        <TargetFramework>net8.0</TargetFramework>
+        <RollForward>LatestMinor</RollForward>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+</Project>

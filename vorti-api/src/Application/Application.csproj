@@ -2,28 +2,16 @@
 
     <PropertyGroup>
         <AssemblyName>vorti-api</AssemblyName>
-        <TargetFramework>net8.0</TargetFramework>
-        <PlatformTarget>x64</PlatformTarget>
-        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <SelfContained>false</SelfContained>
         <TargetType>exe</TargetType>
-
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Vorti</RootNamespace>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <LangVersion>12</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
+        <None Remove="Dockerfile"/>
     </ItemGroup>
 
 </Project>
