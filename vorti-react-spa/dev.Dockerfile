@@ -1,4 +1,4 @@
-FROM node:lts AS builder
+FROM node:20 AS builder
 
 USER node
 

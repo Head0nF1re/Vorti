@@ -1,0 +1,61 @@
+﻿services:
+    backend:
+        depends_on:
+            - pgsql
+        build:
+            context: ./vorti-api/
+            dockerfile: ./dev.Dockerfile
+        pull_policy: build
+        networks:
+            - vorti-network
+        ports:
+            - "8080:8080"
+
+    frontend:
+        depends_on:
+            - backend
+        build:
+            context: ./vorti-react-spa/
+            dockerfile: ./dev.Dockerfile
+        tty: true
+        volumes:
+            - ./vorti-react-spa/:/app/
+        networks:
+            - vorti-network
+        ports:
+            - "3000:3000"
+
+    nginx:
+        depends_on:
+            - backend
+            - frontend
+        image: nginx:1.24
+        volumes:
+            - ./nginx/vorti.nginx.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx/https/localhost.crt:/https/localhost.crt
+            - ./nginx/https/localhost.key:/https/localhost.key
+        networks:
+            - vorti-network
+        ports:
+            - "8001:80"
+            - "8000:443"
+
+    pgsql:
+        image: postgres:16.1
+        environment:
+             POSTGRES_USER: dev
+             POSTGRES_PASSWORD: dev
+             LANG: en_US.utf8
+        volumes:
+            - vorti-volume:/var/lib/postgresql/data
+        networks:
+            - vorti-network
+        ports:
+            - "5432:5432"
+
+networks:
+    vorti-network:
+        external: true
+
+volumes:
+    vorti-volume:
